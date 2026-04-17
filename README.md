@@ -1,4 +1,4 @@
-# College Event Management
+# College Event Management System
 
 A full-stack college event management system with a React + Vite frontend and a Node.js/Express + MongoDB backend.
 

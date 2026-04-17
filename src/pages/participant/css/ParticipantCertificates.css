@@ -1,0 +1,207 @@
+.participant-certificates-page {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(19, 76, 156, 0.12), transparent 28%),
+    radial-gradient(circle at 100% 100%, rgba(214, 152, 58, 0.16), transparent 30%),
+    #f4f7fb;
+  color: #10223f;
+}
+
+.participant-certificates-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 2vw, 1.4rem);
+  margin-bottom: 1rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #133f86 0%, #0f63d9 60%, #53b7f5 100%);
+  color: #fff;
+  box-shadow: 0 18px 36px rgba(17, 49, 92, 0.16);
+}
+
+.participant-certificates-header h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.participant-certificates-header p {
+  margin: 0;
+  max-width: 700px;
+  opacity: 0.92;
+}
+
+.participant-certificates-badge {
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.participant-certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1rem;
+}
+
+.participant-certificates-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.7fr);
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.participant-certificates-search input,
+.participant-certificates-sort select {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #d4e0f1;
+  background: rgba(255, 255, 255, 0.95);
+  color: #12315b;
+  padding: 0.9rem 1rem;
+  font-size: 0.92rem;
+  box-shadow: 0 10px 24px rgba(18, 45, 81, 0.06);
+}
+
+.participant-certificates-search input::placeholder {
+  color: #7a8ca8;
+}
+
+.participant-certificate-card,
+.participant-certificates-state {
+  border-radius: 18px;
+  border: 1px solid #d8e4f3;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 235, 0.96)),
+    #fff;
+  box-shadow: 0 14px 32px rgba(18, 45, 81, 0.08);
+}
+
+.participant-certificate-card {
+  padding: 1.1rem;
+}
+
+.participant-certificate-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.participant-certificate-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8b6220;
+}
+
+.participant-certificate-number {
+  font-size: 0.74rem;
+  color: #6d7d97;
+  font-weight: 700;
+  text-align: right;
+}
+
+.participant-certificate-card h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.35rem;
+  color: #14315a;
+}
+
+.participant-certificate-copy {
+  margin: 0 0 1rem;
+  color: #526784;
+  line-height: 1.55;
+}
+
+.participant-certificate-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.participant-certificate-meta div {
+  border-radius: 12px;
+  border: 1px solid #e3ebf6;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 0.75rem 0.8rem;
+}
+
+.participant-certificate-meta span {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #70829c;
+  font-weight: 800;
+}
+
+.participant-certificate-meta strong {
+  color: #19375f;
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.participant-certificate-download {
+  width: 100%;
+  border: 1px solid #c9daf5;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background: linear-gradient(135deg, #f8fbff, #e9f1ff);
+  color: #12366a;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.participant-certificate-download:hover {
+  box-shadow: 0 10px 20px rgba(16, 41, 78, 0.08);
+}
+
+.participant-certificates-state {
+  padding: 1rem;
+  color: #244061;
+}
+
+.participant-certificates-error {
+  color: #a52f3c;
+  border-color: #f1c5ca;
+  background: #fff5f6;
+}
+
+@media (max-width: 768px) {
+  .participant-certificates-page {
+    padding: 0.8rem;
+  }
+
+  .participant-certificates-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .participant-certificates-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .participant-certificates-badge {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .participant-certificate-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .participant-certificate-card-top {
+    flex-direction: column;
+  }
+}

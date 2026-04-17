@@ -1,0 +1,411 @@
+.admin-venues-page {
+  --av-bg: #eef5ff;
+  --av-surface: rgba(255, 255, 255, 0.95);
+  --av-border: #d4e1f5;
+  --av-text: #10223f;
+  --av-muted: #536887;
+  --av-primary: #0f5fd8;
+  --av-shadow: 0 18px 40px rgba(15, 47, 92, 0.12);
+
+  min-height: 100vh;
+  padding: clamp(0.85rem, 2vw, 1.8rem);
+  background:
+    radial-gradient(circle at 8% 4%, rgba(102, 180, 255, 0.22), transparent 32%),
+    radial-gradient(circle at 100% 96%, rgba(255, 155, 76, 0.16), transparent 36%),
+    var(--av-bg);
+  color: var(--av-text);
+}
+
+.admin-venues-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: clamp(1rem, 2.4vw, 1.7rem);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(255, 255, 255, 0.2), transparent 34%),
+    linear-gradient(125deg, #0f3f8b 0%, #0f5fd8 48%, #2ea7ff 100%);
+  color: #fff;
+  box-shadow: var(--av-shadow);
+}
+
+.admin-venues-title {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.05rem);
+  font-weight: 800;
+}
+
+.admin-venues-subtitle {
+  margin: 0.45rem 0 0;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.admin-venues-count {
+  min-width: 118px;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  text-align: center;
+}
+
+.admin-venues-count span {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.admin-venues-count small {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-venues-message {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-weight: 700;
+}
+
+.admin-venues-message.success {
+  background: #eefbf3;
+  border-color: #bfe6cd;
+  color: #15613f;
+}
+
+.admin-venues-message.error {
+  background: #fff5f6;
+  border-color: #f1c5ca;
+  color: #a52f3c;
+}
+
+.admin-venues-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.admin-venues-form,
+.admin-venues-panel {
+  border: 1px solid var(--av-border);
+  border-radius: 20px;
+  background: var(--av-surface);
+  box-shadow: 0 14px 32px rgba(18, 50, 93, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.admin-venues-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1rem;
+}
+
+.admin-venues-form-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.admin-venues-form h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.admin-venues-form-head p {
+  margin: 0;
+  color: var(--av-muted);
+  line-height: 1.5;
+}
+
+.admin-venues-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #17335b;
+}
+
+.admin-venues-form input,
+.admin-venues-form textarea,
+.admin-venues-toolbar input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #b7cbe9;
+  background: #edf3fb;
+  color: #0f2342;
+  padding: 0.8rem 0.9rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.admin-venues-form textarea {
+  min-height: 136px;
+  resize: vertical;
+}
+
+.admin-venues-form input:focus,
+.admin-venues-form textarea:focus,
+.admin-venues-toolbar input:focus {
+  outline: none;
+  border-color: #5e92dd;
+  box-shadow: 0 0 0 3px rgba(15, 95, 216, 0.14);
+  background: #fff;
+}
+
+.admin-venues-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, var(--av-primary), #2b83e6);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(15, 95, 216, 0.24);
+}
+
+.admin-venues-secondary-btn,
+.admin-venues-card-btn {
+  border: 1px solid #c7d9f4;
+  border-radius: 12px;
+  padding: 0.72rem 0.95rem;
+  background: linear-gradient(180deg, #ffffff, #eef4ff);
+  color: #12366a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-venues-card-btn.secondary {
+  background: linear-gradient(180deg, #f8fbff, #edf3fb);
+  color: #34527e;
+}
+
+.admin-venues-secondary-btn:hover,
+.admin-venues-card-btn:hover {
+  border-color: #9fbae6;
+  background: #ffffff;
+}
+
+.admin-venues-secondary-btn:disabled,
+.admin-venues-card-btn:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.admin-venues-btn:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.admin-venues-panel {
+  padding: 1rem;
+}
+
+.admin-venues-toolbar {
+  margin-bottom: 0.9rem;
+}
+
+.admin-venues-state {
+  padding: 1rem 0.25rem;
+  color: var(--av-muted);
+  font-weight: 600;
+}
+
+.admin-venues-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.admin-venues-card {
+  padding: 0.95rem;
+  border-radius: 18px;
+  border: 1px solid #dbe6f7;
+  background: linear-gradient(180deg, #fff, #f8fbff);
+}
+
+.admin-venues-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.admin-venues-card h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.admin-venues-card span {
+  white-space: nowrap;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #0f5fd8;
+}
+
+.admin-venues-card p {
+  margin: 0.55rem 0 0.45rem;
+  color: #274266;
+  font-weight: 600;
+}
+
+.admin-venues-card small {
+  color: var(--av-muted);
+  line-height: 1.45;
+}
+
+.admin-venues-card-actions {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.95rem;
+}
+
+.admin-venues-history-empty {
+  color: var(--av-muted);
+  font-weight: 600;
+  padding: 0.25rem 0;
+}
+
+.admin-venues-history-list {
+  display: grid;
+  gap: 0.75rem;
+  max-height: min(60vh, 560px);
+  overflow-y: auto;
+  padding-right: 0.15rem;
+}
+
+.admin-venues-history-item {
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: #f7faff;
+  border: 1px solid #e0ebfb;
+}
+
+.admin-venues-history-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.admin-venues-history-title-row strong {
+  color: #17335b;
+}
+
+.admin-venues-history-title-row span {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #0f5fd8;
+}
+
+.admin-venues-history-item p {
+  margin: 0.45rem 0 0.35rem;
+  color: #274266;
+  font-weight: 600;
+}
+
+.admin-venues-history-item small {
+  color: var(--av-muted);
+}
+
+.admin-venues-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(11, 27, 57, 0.46);
+  backdrop-filter: blur(8px);
+}
+
+.admin-venues-modal {
+  width: min(760px, 100%);
+  max-height: min(82vh, 820px);
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(206, 221, 244, 0.95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.98));
+  box-shadow: 0 26px 60px rgba(11, 27, 57, 0.24);
+  padding: 1.1rem;
+}
+
+.admin-venues-modal-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.95rem;
+}
+
+.admin-venues-modal-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #17335b;
+}
+
+.admin-venues-modal-head p {
+  margin: 0.35rem 0 0;
+  color: var(--av-muted);
+  line-height: 1.5;
+}
+
+.admin-venues-modal-close {
+  border: 1px solid #c7d9f4;
+  border-radius: 12px;
+  padding: 0.72rem 0.95rem;
+  background: linear-gradient(180deg, #ffffff, #eef4ff);
+  color: #12366a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-venues-modal-close:hover {
+  border-color: #9fbae6;
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .admin-venues-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .admin-venues-page {
+    padding: 0.7rem;
+  }
+
+  .admin-venues-hero {
+    flex-direction: column;
+    border-radius: 18px;
+  }
+
+  .admin-venues-form-head,
+  .admin-venues-card-actions,
+  .admin-venues-history-title-row,
+  .admin-venues-modal-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-venues-count {
+    width: 100%;
+  }
+
+  .admin-venues-modal {
+    padding: 0.95rem;
+    border-radius: 18px;
+  }
+}

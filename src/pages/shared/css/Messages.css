@@ -1,0 +1,589 @@
+/* Messages.css — fixed composer placement (stays at bottom of the chat panel, not the page)
+   Key idea:
+   - Lock the Messages page to the viewport height (100dvh)
+   - Prevent the OUTER page from scrolling
+   - Make only the thread scroll (overflow:auto)
+   - Composer is a normal flex child at the bottom (no sticky needed)
+*/
+
+/* Make sure the app can calculate 100% heights correctly */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+:root {
+  --msg-page: #eef4fd;
+  --msg-panel: #ffffff;
+  --msg-panel-soft: #f7fbff;
+  --msg-border: #bfd0ea;
+  --msg-border-strong: #9eb6db;
+  --msg-text: #143867;
+  --msg-muted: #567097;
+  --msg-primary: #165fcb;
+  --msg-primary-strong: #0f4fae;
+  --msg-accent: #4ea2eb;
+
+  --msg-shadow: 0 22px 45px rgba(19, 52, 103, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* IMPORTANT: lock the whole messages page to the viewport and stop page scrolling */
+.messages-page {
+  width: 100%;
+  height: 100dvh;           /* ✅ keeps composer in-view (mobile-safe) */
+  min-height: 100dvh;
+  padding: clamp(1rem, 2.4vw, 2rem);
+  overflow: hidden;         /* ✅ prevents the window/page scroll */
+
+  background:
+    radial-gradient(circle at top left, rgba(82, 167, 245, 0.18), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(244, 173, 96, 0.14), transparent 28%),
+    var(--msg-page);
+
+  display: flex;            /* ✅ lets .messages-shell take full height */
+}
+
+.messages-shell {
+  flex: 1;
+  height: 100%;
+  min-height: 0;            /* ✅ critical for nested scrolling */
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+/* panels */
+.messages-sidebar,
+.messages-chat-panel {
+  min-height: 0;            /* ✅ critical */
+}
+
+.messages-card,
+.messages-chat-panel {
+  height: 100%;
+  min-height: 0;
+  border-radius: 24px;
+  border: 1px solid var(--msg-border);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--msg-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.messages-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/* chat panel is a column: header/details/thread/composer */
+.messages-chat-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* switcher */
+.messages-sidebar-switcher {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.messages-sidebar-switcher button {
+  flex: 1;
+  min-height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--msg-border);
+  background: #dfeaf9;
+  color: var(--msg-text);
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.messages-sidebar-switcher button.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--msg-primary), #2275dc 58%, var(--msg-accent) 100%);
+  box-shadow: 0 12px 24px rgba(22, 95, 203, 0.22);
+}
+
+.messages-tab-content {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.messages-card h3,
+.messages-chat-header h3 {
+  margin: 0 0 0.85rem;
+  color: var(--msg-text);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* search + composer input shared */
+.messages-sidebar-search {
+  margin-bottom: 0.9rem;
+}
+
+.messages-sidebar-search input,
+.messages-composer input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.78rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid var(--msg-border);
+  background: #dfeaf9;
+  color: #163761;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.messages-sidebar-search input::placeholder,
+.messages-composer input::placeholder {
+  color: #6a84a7;
+}
+
+.messages-sidebar-search input:focus,
+.messages-composer input:focus {
+  border-color: var(--msg-border-strong);
+  box-shadow: 0 0 0 4px rgba(22, 95, 203, 0.12);
+  background: #ebf3ff;
+}
+
+/* lists */
+.conversation-list,
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  flex: 1;
+  min-height: 0;
+  overflow: auto;           /* ✅ list scrolls inside sidebar */
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.conversation-item,
+.contact-list button {
+  width: 100%;
+  min-height: 76px;
+  padding: 0.9rem;
+  border-radius: 18px;
+  border: 1px solid var(--msg-border);
+  background: var(--msg-panel-soft);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.conversation-item:hover,
+.contact-list button:hover {
+  transform: translateY(-1px);
+  border-color: var(--msg-border-strong);
+  box-shadow: 0 12px 24px rgba(22, 95, 203, 0.12);
+}
+
+.conversation-item.active {
+  border-color: transparent;
+  background: linear-gradient(135deg, rgba(22, 95, 203, 0.14), rgba(78, 162, 235, 0.14));
+  box-shadow: 0 14px 24px rgba(22, 95, 203, 0.16);
+}
+
+.messages-list-user {
+  display: flex;
+  align-items: center;
+  gap: 0.78rem;
+  min-width: 0;
+}
+
+.messages-list-avatar,
+.messages-chat-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 20px rgba(17, 53, 105, 0.16);
+  background: linear-gradient(180deg, #eef5ff, #dae8fb);
+}
+
+.messages-list-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.conversation-list .messages-list-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.conversation-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.conversation-head span,
+.messages-list-name {
+  color: var(--msg-text);
+  font-size: 0.92rem;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-list .messages-muted {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.35;
+  max-height: 2.7em;
+}
+
+.unread-dot {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--msg-primary), #3184e7);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+/* header + details */
+.messages-chat-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid rgba(165, 187, 220, 0.7);
+  background: rgba(247, 251, 255, 0.9);
+}
+
+.messages-chat-user {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.messages-chat-user h3,
+.messages-chat-user .messages-muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messages-details-btn {
+  min-height: 42px;
+  padding: 0 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--msg-border);
+  background: #dfeaf9;
+  color: var(--msg-text);
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.messages-details-btn:hover {
+  border-color: var(--msg-border-strong);
+  background: #ebf3ff;
+}
+
+.messages-user-details {
+  flex-shrink: 0;
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid rgba(165, 187, 220, 0.7);
+  background: rgba(247, 251, 255, 0.82);
+}
+
+.messages-user-details p {
+  margin: 0 0 0.35rem;
+  color: var(--msg-text);
+  font-size: 0.86rem;
+}
+
+.messages-user-details p:last-child {
+  margin-bottom: 0;
+}
+
+/* ✅ THIS is what keeps the composer visible:
+   thread takes remaining height and is the only thing that scrolls */
+.messages-thread {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;           /* ✅ internal scroll */
+  padding: 1rem;
+  background:
+    radial-gradient(circle at top left, rgba(82, 167, 245, 0.08), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(244, 173, 96, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(236, 244, 255, 0.7));
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.message-row.mine {
+  justify-content: flex-end;
+}
+
+.message-row.theirs {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  position: relative;
+  max-width: min(80%, 640px);
+  padding: 0.82rem 0.95rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(17, 53, 105, 0.08);
+}
+
+.message-bubble.mine {
+  border: 1px solid rgba(22, 95, 203, 0.2);
+  border-bottom-right-radius: 10px;
+  background: linear-gradient(135deg, #dcebff, #c7ddff);
+  margin-left: auto;
+}
+
+.message-bubble.theirs {
+  border: 1px solid rgba(191, 208, 234, 0.9);
+  border-bottom-left-radius: 10px;
+  background: linear-gradient(135deg, #ffffff, #eef5ff);
+  margin-right: auto;
+}
+
+.message-bubble.deleted {
+  border-style: dashed;
+  background: linear-gradient(135deg, #eef3f8, #e6edf6);
+}
+
+.message-bubble p {
+  margin: 0 0 0.34rem;
+  color: #173761;
+  line-height: 1.45;
+  word-break: break-word;
+  white-space: pre-line;
+}
+
+.message-bubble.deleted p {
+  color: #6b7c96;
+  font-style: italic;
+}
+
+.message-delete-btn {
+  position: absolute;
+  top: 50%;
+  left: -2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(22, 95, 203, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #4f6689;
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, background 0.18s ease;
+  z-index: 2;
+}
+
+.message-delete-btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.message-delete-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.message-delete-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.message-row.mine:hover .message-delete-btn,
+.message-bubble.actions-open .message-delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (hover: none) {
+  .message-row.mine:hover .message-delete-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(6px);
+  }
+
+  .message-bubble.actions-open .message-delete-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.message-time {
+  display: block;
+  text-align: right;
+  color: #647da0;
+  font-size: 0.72rem;
+}
+
+.messages-day-divider {
+  display: flex;
+  justify-content: center;
+  margin: 0.35rem 0 0.8rem;
+}
+
+.messages-day-divider span {
+  min-height: 30px;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--msg-border);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--msg-muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ composer is NOT sticky. It's a normal bottom row in the chat panel */
+.messages-composer {
+  flex-shrink: 0;
+  display: flex;
+  gap: 0.72rem;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid rgba(165, 187, 220, 0.7);
+  background: rgba(247, 251, 255, 0.9);
+}
+
+.messages-composer button {
+  min-height: 48px;
+  padding: 0.72rem 1.25rem;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--msg-primary), #2275dc 58%, var(--msg-accent) 100%);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 24px rgba(22, 95, 203, 0.2);
+}
+
+.messages-muted {
+  margin: 0;
+  color: var(--msg-muted);
+  font-size: 0.82rem;
+}
+
+.messages-empty {
+  margin: auto;
+  padding: 1rem 1.15rem;
+  border-radius: 18px;
+  border: 1px solid var(--msg-border);
+  background: rgba(247, 251, 255, 0.88);
+  color: var(--msg-text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.messages-error {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: #ab2e2e;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .messages-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(280px, 40%) minmax(0, 1fr);
+    height: 100%;
+  }
+
+  .messages-sidebar {
+    min-height: 0;
+  }
+
+  .messages-card {
+    height: 100%;
+  }
+
+  .messages-chat-panel {
+    height: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .messages-page {
+    padding: 0.8rem;
+  }
+
+  .messages-card,
+  .messages-chat-panel {
+    border-radius: 20px;
+  }
+
+  .messages-chat-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .messages-composer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .messages-composer button {
+    width: 100%;
+  }
+
+  .message-bubble {
+    max-width: 90%;
+  }
+}

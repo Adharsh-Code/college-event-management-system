@@ -1,0 +1,257 @@
+.participant-feedback-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+}
+
+.participant-feedback-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #fff7ed 0%, #eef6ff 100%);
+  border: 1px solid #d9e7f7;
+}
+
+.participant-feedback-eyebrow {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9a5b16;
+}
+
+.participant-feedback-hero h1 {
+  margin: 0 0 10px;
+  font-size: 34px;
+  color: #1f2f49;
+}
+
+.participant-feedback-subtitle {
+  margin: 0;
+  max-width: 720px;
+  color: #53657e;
+}
+
+.participant-feedback-stats {
+  display: flex;
+  gap: 14px;
+}
+
+.participant-feedback-stat {
+  min-width: 120px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #d7e3f1;
+}
+
+.participant-feedback-stat span {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #173153;
+}
+
+.participant-feedback-stat small {
+  color: #6a7a8f;
+}
+
+.participant-feedback-toolbar {
+  display: flex;
+}
+
+.participant-feedback-search {
+  width: min(420px, 100%);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #cedaea;
+  background: #fff;
+  color: #24354e;
+}
+
+.participant-feedback-banner,
+.participant-feedback-state {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #f8fbff;
+  border: 1px solid #d8e5f3;
+  color: #2b4363;
+}
+
+.participant-feedback-error {
+  background: #fff3f2;
+  border-color: #f1c2bc;
+  color: #8a3328;
+}
+
+.participant-feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.participant-feedback-card {
+  padding: 22px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid #dce6f1;
+  box-shadow: 0 20px 50px rgba(34, 52, 84, 0.08);
+}
+
+.participant-feedback-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.participant-feedback-card-header h2 {
+  margin: 0 0 8px;
+  color: #1f2c44;
+  font-size: 24px;
+}
+
+.participant-feedback-card-header p {
+  margin: 0;
+  color: #607086;
+}
+
+.participant-feedback-status {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf5ff;
+  color: #24518d;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.participant-feedback-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  color: #5f6f83;
+  font-size: 14px;
+}
+
+.participant-feedback-existing {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #f8fbff;
+  border: 1px solid #dce8f5;
+}
+
+.participant-feedback-existing strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 24px;
+  color: #16365e;
+}
+
+.participant-feedback-existing p {
+  margin: 0 0 8px;
+  color: #485b75;
+}
+
+.participant-feedback-actions {
+  margin-top: 18px;
+}
+
+.participant-feedback-actions button,
+.participant-feedback-form-actions button,
+.participant-feedback-recommend button {
+  border: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.participant-feedback-actions button,
+.participant-feedback-form-actions button {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #1f4f88;
+  color: #fff;
+  font-weight: 600;
+}
+
+.participant-feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e3eaf2;
+}
+
+.participant-feedback-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #29405f;
+  font-weight: 600;
+}
+
+.participant-feedback-form select,
+.participant-feedback-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #ced9e6;
+  background: #fff;
+  color: #24354e;
+  font: inherit;
+}
+
+.participant-feedback-recommend {
+  display: flex;
+  gap: 10px;
+}
+
+.participant-feedback-recommend button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #edf2f8;
+  color: #35506f;
+  font-weight: 600;
+}
+
+.participant-feedback-recommend button.active {
+  background: #173f70;
+  color: #fff;
+}
+
+.participant-feedback-form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.participant-feedback-form-actions .secondary {
+  background: #edf2f8;
+  color: #284261;
+}
+
+@media (max-width: 768px) {
+  .participant-feedback-page {
+    padding: 18px;
+  }
+
+  .participant-feedback-hero {
+    flex-direction: column;
+  }
+
+  .participant-feedback-stats {
+    width: 100%;
+  }
+
+  .participant-feedback-stat {
+    flex: 1;
+  }
+}
